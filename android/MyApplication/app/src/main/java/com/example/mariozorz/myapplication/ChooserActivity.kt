@@ -32,5 +32,15 @@ class ChooserActivity : AppCompatActivity() {
                 }
         )
 
+        val reactNativeRecyclerButton = findViewById<Button>(R.id.react_recyclerview_activity)
+        reactNativeRecyclerButton.setOnClickListener(
+                object : View.OnClickListener {
+                    override fun onClick(v: View?) {
+                        val intent = Intent(this@ChooserActivity, RNRecyclerActivity::class.java)
+                        startActivity(intent)
+                    }
+                }
+        )
+
     }
 }

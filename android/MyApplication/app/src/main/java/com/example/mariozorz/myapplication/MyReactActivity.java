@@ -22,6 +22,7 @@ public class MyReactActivity extends Activity implements DefaultHardwareBackBtnH
         super.onCreate(savedInstanceState);
 
         mReactRootView = new ReactRootView(this);
+        //mReactRootView.dispa
         mReactInstanceManager = ReactInstanceManager.builder()
                 .setApplication(getApplication())
                 .setBundleAssetName("index.android.bundle")
