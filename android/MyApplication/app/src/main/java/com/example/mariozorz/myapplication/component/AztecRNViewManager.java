@@ -4,13 +4,12 @@ import com.facebook.react.uimanager.SimpleViewManager;
 import com.facebook.react.uimanager.ThemedReactContext;
 import com.facebook.react.uimanager.annotations.ReactProp;
 
-import org.wordpress.aztec.AztecText;
 
 /**
  * Created by mariozorz on 3/2/18.
  */
 
-public class AztecRNViewManager extends SimpleViewManager<AztecText> {
+public class AztecRNViewManager extends SimpleViewManager<AztecTextRNView> {
 
     public static final String REACT_CLASS = "AztecTextRNView";
 
@@ -20,7 +19,7 @@ public class AztecRNViewManager extends SimpleViewManager<AztecText> {
     }
 
     @Override
-    protected AztecText createViewInstance(ThemedReactContext reactContext) {
+    protected AztecTextRNView createViewInstance(ThemedReactContext reactContext) {
         return new AztecTextRNView(reactContext);
     }
 
