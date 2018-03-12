@@ -37,9 +37,11 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
 
-    compile('com.github.wordpress-mobile.WordPress-Aztec-Android:aztec:v1.1')
-    compile('com.github.wordpress-mobile.WordPress-Aztec-Android:wordpress-shortcodes:v1.1')
-    compile('com.github.wordpress-mobile.WordPress-Aztec-Android:wordpress-comments:v1.1')
+    //7820d4376d87080d55009dcf8d4b2928102a58af Danilo's changes to make AztecText not final (inheritable)
+    //compile('com.github.wordpress-mobile.WordPress-Aztec-Android:aztec:v1.1')
+    compile('com.github.wordpress-mobile.WordPress-Aztec-Android:aztec:7820d4376d87080d55009dcf8d4b2928102a58af')
+    compile('com.github.wordpress-mobile.WordPress-Aztec-Android:wordpress-shortcodes:7820d4376d87080d55009dcf8d4b2928102a58af')
+    compile('com.github.wordpress-mobile.WordPress-Aztec-Android:wordpress-comments:7820d4376d87080d55009dcf8d4b2928102a58af')
 
     // Required Aztec dependencies (they should be included but Jitpack seems to be stripping these out)
     compile "org.jetbrains.kotlin:kotlin-stdlib:1.1.4"

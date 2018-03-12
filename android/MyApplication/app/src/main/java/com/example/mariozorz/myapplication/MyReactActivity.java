@@ -3,6 +3,7 @@ package com.example.mariozorz.myapplication;
 import android.app.Activity;
 import android.os.Bundle;
 
+import com.example.mariozorz.myapplication.component.ReactAztecPackage;
 import com.facebook.react.common.LifecycleState;
 import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.ReactRootView;
@@ -28,6 +29,7 @@ public class MyReactActivity extends Activity implements DefaultHardwareBackBtnH
                 .setBundleAssetName("index.android.bundle")
                 .setJSMainModulePath("index")
                 .addPackage(new MainReactPackage())
+                .addPackage(new ReactAztecPackage())
                 .setUseDeveloperSupport(BuildConfig.DEBUG)
                 .setInitialLifecycleState(LifecycleState.RESUMED)
                 .build();
