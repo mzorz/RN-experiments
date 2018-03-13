@@ -4,7 +4,7 @@ import { requireNativeComponent, ViewPropTypes } from 'react-native';
 
 var iface = {
     name: 'AztecTextRNView',
-    PropTypes: {
+    propTypes: {
       text: PropTypes.string,
         ...ViewPropTypes // include the default view properties
     }
