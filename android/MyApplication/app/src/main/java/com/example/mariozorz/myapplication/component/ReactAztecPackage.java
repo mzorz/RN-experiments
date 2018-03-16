@@ -1,5 +1,6 @@
 package com.example.mariozorz.myapplication.component;
 
+import com.example.mariozorz.myapplication.component.inflated.AztecRNViewInflatedManager;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.bridge.NativeModule;
 import com.facebook.react.bridge.ReactApplicationContext;
@@ -23,6 +24,7 @@ public class ReactAztecPackage implements ReactPackage{
     public List<ViewManager> createViewManagers(ReactApplicationContext reactContext) {
         List<ViewManager> views = new ArrayList<>();
         views.add(new AztecRNViewManager());
+        views.add(new AztecRNViewInflatedManager());
         return views;
     }
 }
