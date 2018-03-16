@@ -6,10 +6,14 @@ class HelloWorld extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.hello}>Hello, World</Text>
-        <Text style={styles.hello}>Hello, World second line</Text>
         <AztecTextRNView
-        text={'this is a test'}
+         style={styles.hello}
+         color = {'black'}
+         text = {'hello thi is a atest from js'}
+         maxImagesWidth = {300}
+         editable = {true}
+         autoGrow = {true}
+         multiline = {true}
         />
       </View>
     );
@@ -24,6 +28,7 @@ var styles = StyleSheet.create({
     fontSize: 20,
     textAlign: 'center',
     margin: 10,
+    minHeight: 200,
   },
 });
 

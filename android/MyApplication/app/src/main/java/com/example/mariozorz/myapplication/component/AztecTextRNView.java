@@ -19,7 +19,6 @@ public class AztecTextRNView extends AztecText {
         addPlugin(new CaptionShortcodePlugin(this));
         addPlugin(new VideoShortcodePlugin());
         addPlugin(new AudioShortcodePlugin());
-
     }
 
     private void addPlugin(IAztecPlugin plugin) {
