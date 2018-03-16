@@ -6,6 +6,8 @@ var iface = {
     name: 'AztecTextRNView',
     propTypes: {
       text: PropTypes.string,
+      onLineCountChange: PropTypes.bool,
+      onChange: PropTypes.func,
         ...ViewPropTypes // include the default view properties
     }
 }
