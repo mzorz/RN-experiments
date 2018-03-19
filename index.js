@@ -7,8 +7,15 @@ class HelloWorld extends React.Component {
 
 constructor (props) {
     super(props);
-    this.state = { text: 'ESTO ES UNA PRUEBA'};
-    //this._onChange = this._onChange.bind(this);
+    this.state = { text: 'ESTO ES UNA PRUEBA', lineCount: 0};
+    this._onChange = this._onChange.bind(this);
+  }
+
+  updateState = () => {
+    console.log("estamos en updateState del parent");
+      // this.setState({
+      //     //show: !this.state.show
+      // });
   }
 
   _onChange(event: Event) {
@@ -18,12 +25,14 @@ constructor (props) {
     //   return;
     // }
     // this.props.onChangeMessage(event.nativeEvent.message);
+    console.log('current state: ' + JSON.stringify(this.state));
+    this.state.lineCount = event.nativeEvent.lineCount;
   }
 
   render() {
     return (
       <View style={styles.container}>
-        <AztecTextRNView
+        <Child
          style={styles.hello}
          color = {'black'}
          text = {'AztecTextRNView hello thi is a atest from js'}
@@ -31,17 +40,11 @@ constructor (props) {
          editable = {true}
          autoGrow = {true}
          multiline = {true}
+
          onChange={this._onChange}
          onLineCountChange = {true}
+         minHeight={this.state.lineCount * 40}
          //onChange={(text) => this.setState({text})}
-        />
-        <TextInput
-          style={{borderColor: 'gray', borderWidth: 1}}
-          value={this.state.text}
-          editable = {true}
-          multiline = {true}
-          autoGrow = {false}
-          onChangeText={(text) => this.setState({text})}
         />
         <Text style={styles.hello}>
           TEXTO: {JSON.stringify(this.state.text)}
@@ -65,5 +68,37 @@ var styles = StyleSheet.create({
     flex:1
   },
 });
+
+class Child extends React.Component {
+  constructor (props) {
+      super(props);
+      this.state = { text: 'THIS IS A TEST - CHILD', lineCount: 0};
+      //this._onChange = this._onChange.bind(this);
+    }
+
+  _onChange = () => {
+      console.log("_onChange in Child");
+      console.log("_onChange in Child: " + JSON.stringify(this.props));
+      this.props.updateState();
+    }
+  render() {
+    return (
+        <AztecTextRNView
+         style={styles.hello}
+         color = {'black'}
+         text = {'AztecTextRNView hello thi is a atest from js'}
+         maxImagesWidth = {300}
+         editable = {true}
+         autoGrow = {true}
+         multiline = {true}
+
+         onChange={this._onChange}
+         onLineCountChange = {true}
+         minHeight={this.state.lineCount * 40}
+         //onChange={(text) => this.setState({text})}
+        />
+    );
+  }
+}
 
 AppRegistry.registerComponent('MyReactNativeApp', () => HelloWorld);
