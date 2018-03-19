@@ -116,6 +116,7 @@ public class AztecRNViewManager extends SimpleViewManager<AztecTextRNView> {
                 // TODO here send signal to JS so the RN component can change its space
                 final WritableMap event = Arguments.createMap();
                 event.putString("message", "MyMessage");
+                event.putInt("lineCount", currentLineCount);
                 mReactContext.getNativeModule(UIManagerModule.class).getEventDispatcher().dispatchEvent(
                         new Event(mAztecTextRNView.getId()) {
                             @Override

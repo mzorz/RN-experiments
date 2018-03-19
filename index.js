@@ -13,6 +13,7 @@ constructor (props) {
 
   _onChange(event: Event) {
     console.log('_onChange: ' + event.nativeEvent.message);
+    console.log('_onChange: ' + event.nativeEvent.lineCount);
     // if (!this.props.onChangeMessage) {
     //   return;
     // }
