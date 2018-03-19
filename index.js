@@ -8,14 +8,15 @@ class HelloWorld extends React.Component {
 constructor (props) {
     super(props);
     this.state = { text: 'ESTO ES UNA PRUEBA'};
-    this._onChange = this._onChange.bind(this);
+    //this._onChange = this._onChange.bind(this);
   }
 
   _onChange(event: Event) {
-    if (!this.props.onChangeMessage) {
-      return;
-    }
-    this.props.onChangeMessage(event.nativeEvent.message);
+    console.log('_onChange: ' + event.nativeEvent.message);
+    // if (!this.props.onChangeMessage) {
+    //   return;
+    // }
+    // this.props.onChangeMessage(event.nativeEvent.message);
   }
 
   render() {
@@ -29,15 +30,9 @@ constructor (props) {
          editable = {true}
          autoGrow = {true}
          multiline = {true}
-         //onChange={this._onChange}
-         onChange={(text) => this.setState({text})}
-        />
-        <AztecTextRNInflatedView
-         style={styles.hello}
-         color = {'black'}
-         text = {'AztecTextRNInflatedViewINFLATED VIEW HERE'}
-         editable = {true}
-         multiline = {true}
+         onChange={this._onChange}
+         onLineCountChange = {true}
+         //onChange={(text) => this.setState({text})}
         />
         <TextInput
           style={{borderColor: 'gray', borderWidth: 1}}

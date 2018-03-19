@@ -10,7 +10,9 @@ import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.common.MapBuilder;
 import com.facebook.react.uimanager.SimpleViewManager;
 import com.facebook.react.uimanager.ThemedReactContext;
+import com.facebook.react.uimanager.UIManagerModule;
 import com.facebook.react.uimanager.annotations.ReactProp;
+import com.facebook.react.uimanager.events.Event;
 import com.facebook.react.uimanager.events.RCTEventEmitter;
 
 import java.util.Map;
@@ -60,28 +62,39 @@ public class AztecRNViewManager extends SimpleViewManager<AztecTextRNView> {
     @ReactProp(name = "onLineCountChange", defaultBoolean = false)
     public void setOnLineCountChange(final AztecTextRNView view, boolean watchOnLineCountChange) {
         if (watchOnLineCountChange) {
-            view.setLineCountWatcher(new ReactContentSizeWatcher(view));
+            //view.setLineCountWatcher(new ReactContentSizeWatcher(view));
         } else {
-            view.setLineCountWatcher(null);
+            //view.setLineCountWatcher(null);
         }
     }
 
     @Override
     public Map getExportedCustomBubblingEventTypeConstants() {
+//        return MapBuilder.builder()
+//                .put(
+//                        "topChange",
+//                        MapBuilder.of(
+//                                "phasedRegistrationNames",
+//                                MapBuilder.of("bubbled", "onChange")))
+//                .build();
+
         return MapBuilder.builder()
-                .put(
-                        "topChange",
-                        MapBuilder.of(
-                                "phasedRegistrationNames",
-                                MapBuilder.of("bubbled", "onChange")))
+                .put("topChange", MapBuilder.of("registrationName", "onChange"))
                 .build();
     }
 
+    @Override
+    protected void addEventEmitters(ThemedReactContext reactContext, AztecTextRNView view) {
+        view.setLineCountWatcher(new ReactContentSizeWatcher(reactContext, view));
+    }
+
     public class ReactContentSizeWatcher implements TextWatcher {
+        private ThemedReactContext mReactContext;
         private AztecTextRNView mAztecTextRNView;
         private int mLineCount = 0;
 
-        public ReactContentSizeWatcher(AztecTextRNView view) {
+        public ReactContentSizeWatcher(ThemedReactContext reactContext, AztecTextRNView view) {
+            mReactContext = reactContext;
             mAztecTextRNView = view;
         }
 
@@ -101,16 +114,22 @@ public class AztecRNViewManager extends SimpleViewManager<AztecTextRNView> {
             if (mLineCount != currentLineCount) {
                 mLineCount = currentLineCount;
                 // TODO here send signal to JS so the RN component can change its space
-                WritableMap event = Arguments.createMap();
+                final WritableMap event = Arguments.createMap();
                 event.putString("message", "MyMessage");
-                ReactContext reactContext = (ReactContext)mAztecTextRNView.getContext();
-                reactContext.getJSModule(RCTEventEmitter.class).receiveEvent(
-                        mAztecTextRNView.getId(),
-                        "topChange",
-                        event);
+                mReactContext.getNativeModule(UIManagerModule.class).getEventDispatcher().dispatchEvent(
+                        new Event(mAztecTextRNView.getId()) {
+                            @Override
+                            public String getEventName() {
+                                return "topChange";
+                            }
 
+                            @Override
+                            public void dispatch(RCTEventEmitter rctEventEmitter) {
+                                rctEventEmitter.receiveEvent(getViewTag(), getEventName(), event);
+                            }
+                        }
+                );
             }
-
         }
     }
 }
