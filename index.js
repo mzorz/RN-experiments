@@ -39,7 +39,8 @@ constructor (props) {
       justifyContent: 'center',
       borderColor: 'gray', 
       borderWidth: 2,
-      height: (this.state.lineCount+1) * 40
+      //height: (this.state.lineCount+1) * 40,
+      minHeight:  (this.state.lineCount+1) * 40
       //height: 200
     }
   }
@@ -55,20 +56,21 @@ constructor (props) {
            text = {'AztecTextRNView hello thi is a atest from js\n new line here let us see'}
            onChange={this._onChange}
            onLineCountChange = {true}
+           //minHeight = {this.state.lineCount * 40} 
            //onChange={(text) => this.setState({text})}
           />
-          <TextInput
-            style={{borderColor: 'gray', borderWidth: 1}}
-            value={this.state.text}
-            editable = {true}
-            multiline = {true}
-            autoGrow = {false}
-            onChangeText={(text) => this.setState({text})}
-          />
-          <Text style={styles.hello}>
-            TEXTO: {JSON.stringify(this.state)}
-          </Text>
         </View>
+        <TextInput
+          style={{borderColor: 'gray', borderWidth: 1}}
+          value={this.state.text}
+          editable = {true}
+          multiline = {true}
+          autoGrow = {false}
+          onChangeText={(text) => this.setState({text})}
+        />
+        <Text style={styles.hello}>
+          TEXTO: {JSON.stringify(this.state)}
+        </Text>
        </View>
     );
   }
@@ -85,7 +87,7 @@ var styles = StyleSheet.create({
     textAlign: 'center',
     margin: 10,
     //minHeight: 200,
-    flex:1
+    flex:4
   },
 });
 
