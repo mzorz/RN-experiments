@@ -117,6 +117,7 @@ public class AztecRNViewManager extends SimpleViewManager<AztecTextRNView> {
                 final WritableMap event = Arguments.createMap();
                 event.putString("message", "MyMessage");
                 event.putInt("lineCount", currentLineCount);
+                event.putInt("newHeight", mAztecTextRNView.getHeight());
                 mReactContext.getNativeModule(UIManagerModule.class).getEventDispatcher().dispatchEvent(
                         new Event(mAztecTextRNView.getId()) {
                             @Override

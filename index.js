@@ -7,7 +7,7 @@ class HelloWorld extends React.Component {
 
 constructor (props) {
     super(props);
-    this.state = { text: 'ESTO ES UNA PRUEBA', lineCount: 0};
+    this.state = { text: 'THIS IS A TEST', lineCount: 0};
     this._onChange = this._onChange.bind(this);
     this.state.lineCount = 0
     console.log("setting constructor value: " + this.state.lineCount);
@@ -16,6 +16,7 @@ constructor (props) {
   _onChange(event: Event) {
     console.log('_onChange: ' + event.nativeEvent.message);
     console.log('_onChange: ' + event.nativeEvent.lineCount);
+    console.log('_onChange: ' + event.nativeEvent.newHeight);
     // if (!this.props.onChangeMessage) {
     //   return;
     // }
@@ -27,9 +28,10 @@ constructor (props) {
     //             return { text: 'ESTO ES UNA PRUEBA', lineCount: event.nativeEvent.lineCount};
     //         });
 
-    this.setState({ text: 'ESTO ES UNA PRUEBA', lineCount: event.nativeEvent.lineCount});
+    this.setState({ text: 'THIS IS A TEST', lineCount: event.nativeEvent.lineCount, newHeight: event.nativeEvent.newHeight});
 
-    console.log("setting this state value: " + this.state.lineCount);
+    console.log("setting this state value lineCount: " + this.state.lineCount);
+    console.log("setting this state value: newHeight: " + this.state.newHeight);
   }
 
   _aztecwrapperviewStyle() {
@@ -41,6 +43,8 @@ constructor (props) {
       borderWidth: 2,
       //height: (this.state.lineCount+1) * 40,
       minHeight:  (this.state.lineCount+1) * 40
+      //minHeight: this.state.newHeight * flex
+      //height: this.state.newHeight
       //height: 200
     }
   }
@@ -69,7 +73,7 @@ constructor (props) {
           onChangeText={(text) => this.setState({text})}
         />
         <Text style={styles.hello}>
-          TEXTO: {JSON.stringify(this.state)}
+          TEXT: {JSON.stringify(this.state)}
         </Text>
        </View>
     );
